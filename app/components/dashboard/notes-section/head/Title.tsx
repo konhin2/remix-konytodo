@@ -1,4 +1,7 @@
+import { useTranslation } from "react-i18next"
+
 const Title: React.FC = () => {
+	const { t } = useTranslation()
 	return (
 		<h2 className="text-xl font-semibold">
 			<span className="inline-flex items-center gap-x-2">
@@ -9,7 +12,7 @@ const Title: React.FC = () => {
 				>
 					<circle cx={3} cy={3} r={3} />
 				</svg>
-				To Do
+				{t("dashboard.NOTES_TITLE")}
 			</span>
 		</h2>
 	)

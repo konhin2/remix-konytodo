@@ -1,6 +1,10 @@
 {
+    "DROPDOWN_TITLE": "Sort By",
     "HOME_LINK": "Home",
+    "INPUT_NAME": "Note Name",
+    "INPUT_CONTENT": "Note Content",
     "NOTES_LINK": "Notes",
+    "NOTES_TITLE": "To Do",
     "SORTED_BY_ACTIVE": "Active",
     "SORTED_BY_DATE": "Date",
     "SORTED_BY_NAME": "Name",
