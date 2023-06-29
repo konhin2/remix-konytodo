@@ -1,4 +1,8 @@
 {
     "HOME_LINK": "Home",
-    "NOTES_LINK": "Notes"
+    "NOTES_LINK": "Notes",
+    "SORTED_BY_ACTIVE": "Active",
+    "SORTED_BY_DATE": "Date",
+    "SORTED_BY_NAME": "Name",
+    "SORTED_BY_DONE": "Done"
 }
