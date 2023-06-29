@@ -1,3 +1,4 @@
+import WraperAddNote from "./add-note"
 import WraperHead from "./head"
 import WraperNote from "./note"
 
@@ -7,7 +8,7 @@ const NotexSection: React.FC = () => {
 			<WraperHead />
 			<div className="mx-4 overflow-hidden rounded-md bg-white shadow">
 				<ul role="list" className="divide-y divide-gray-200">
-					<li className="px-6 py-4">Add Note</li>
+					<WraperAddNote />
 					<WraperNote />
 					<WraperNote />
 				</ul>

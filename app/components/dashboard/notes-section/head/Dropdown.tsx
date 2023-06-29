@@ -9,9 +9,9 @@ function classNames(...classes: string[]) {
 }
 const Dropdown: React.FC = () => {
 	const { t } = useTranslation()
-	const sortOptions = SortOptions.sort().map((option) => {
+	const sortOptions = SortOptions.sort().map((option, i) => {
 		return (
-			<Menu.Item>
+			<Menu.Item key={i}>
 				{({ active }) => (
 					<button
 						className={classNames(

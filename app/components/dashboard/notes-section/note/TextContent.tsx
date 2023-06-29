@@ -1,12 +1,12 @@
 const TextContent: React.FC = () => {
 	return (
-		<div className="ml-4 mr-2 text-sm leading-6">
-			<span id="comments-description" className="text-gray-500">
-				Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-				commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-				penatibus et magnis dis parturient montes, nascetur ridiculus
-				mus. Donec qu
-			</span>
+		<div className="ml-4 mr-3 text-sm leading-6">
+			<label htmlFor="comments" className="font-medium text-gray-900">
+				Comments
+			</label>
+			<p id="comments-description" className="text-gray-500 text-justify">
+				Get notified when someones posts a comment on a posting.
+			</p>
 		</div>
 	)
 }
