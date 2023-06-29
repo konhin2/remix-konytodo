@@ -30,8 +30,9 @@ export default {
 			konytool: {
 				DEFAULT: "#1675F2",
 				d: "#0442BF",
-				m: "#4B94F2",
 				l: "#85B4F2",
+				m: "#4B94F2",
+				r: "#F2422E",
 				ul: "#D5E7F2"
 			}
 		},
