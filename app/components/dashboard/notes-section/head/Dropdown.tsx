@@ -1,6 +1,7 @@
 import { Menu, Transition } from "@headlessui/react"
 import { ChevronDownIcon } from "@heroicons/react/20/solid"
-import { Fragment } from "react"
+import { Link, useSearchParams } from "@remix-run/react"
+import * as React from "react"
 import { useTranslation } from "react-i18next"
 import { SortOptions } from "~/components/dashboard/constants"
 
@@ -9,11 +10,28 @@ function classNames(...classes: string[]) {
 }
 const Dropdown: React.FC = () => {
 	const { t } = useTranslation()
-	const sortOptions = SortOptions.sort().map((option, i) => {
+
+	// Get the sort option from the query params
+	const [searchParams] = useSearchParams()
+	const order = searchParams.get("order") || SortOptions[2].value
+
+	// Set the selected option from the query params(key-form)
+	const [selected, setSelected] = React.useState(order)
+
+	// Update the selected option when the query params change
+	React.useEffect(() => {
+		setSelected(order)
+	}, [order])
+	const selectedTitle = SortOptions.find(
+		(option) => option.value === selected
+	)?.tKey
+
+	const sortOptionsSections = SortOptions.map((option) => {
 		return (
-			<Menu.Item key={i}>
+			<Menu.Item key={option.value}>
 				{({ active }) => (
-					<button
+					<Link
+						to={`?order=${option.value}`}
 						className={classNames(
 							active
 								? "bg-gray-100 text-gray-900"
@@ -21,8 +39,8 @@ const Dropdown: React.FC = () => {
 							"block px-4 py-2 text-sm w-full"
 						)}
 					>
-						{t(`dashboard.${option}`)}
-					</button>
+						{t(`dashboard.${option.tKey}`)}
+					</Link>
 				)}
 			</Menu.Item>
 		)
@@ -31,7 +49,7 @@ const Dropdown: React.FC = () => {
 		<Menu as="div" className="relative inline-block text-left">
 			<div>
 				<Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-					{t("dashboard.DROPDOWN_TITLE")}
+					{t(`dashboard.${selectedTitle}`)}
 					<ChevronDownIcon
 						className="-mr-1 h-5 w-5 text-gray-400"
 						aria-hidden="true"
@@ -40,7 +58,7 @@ const Dropdown: React.FC = () => {
 			</div>
 
 			<Transition
-				as={Fragment}
+				as={React.Fragment}
 				enter="transition ease-out duration-100"
 				enterFrom="transform opacity-0 scale-95"
 				enterTo="transform opacity-100 scale-100"
@@ -49,7 +67,7 @@ const Dropdown: React.FC = () => {
 				leaveTo="transform opacity-0 scale-95"
 			>
 				<Menu.Items className="absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-					<div className="py-1">{sortOptions}</div>
+					<div className="py-1">{sortOptionsSections}</div>
 				</Menu.Items>
 			</Transition>
 		</Menu>

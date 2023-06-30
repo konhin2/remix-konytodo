@@ -1,4 +1,4 @@
-import { INavLinkProps } from "~/types/dashboard"
+import { INavLinkProps, ISortOptionsProps } from "~/types/dashboard"
 
 export const SidebarLinkClass = {
 	activeText: "bg-gray-50 text-konytool",
@@ -22,11 +22,11 @@ export const SidebarLink: INavLinkProps[] = [
 	}
 ]
 
-export const SortOptions: string[] = [
-	"SORTED_BY_ACTIVE",
-	"SORTED_BY_DONE",
-	"SORTED_BY_NEW_OLD",
-	"SORTED_BY_OLD_NEW"
+export const SortOptions: ISortOptionsProps[] = [
+	{ tKey: "SORTED_BY_ACTIVE", value: "completed-desc" },
+	{ tKey: "SORTED_BY_DONE", value: "completed-asc" },
+	{ tKey: "SORTED_BY_NEW_OLD", value: "createdAt-desc" },
+	{ tKey: "SORTED_BY_OLD_NEW", value: "createdAt-asc" }
 ]
 
 export const NoteIconsPath = {

@@ -1,7 +1,8 @@
 import { CreateNoteProps } from "~/types/models"
 import { db } from "~/utils/db.server"
 
-export const getAllTodos = async () => {
+export const getAllTodos = async (order: string) => {
+	const [key, value] = order.split("-")
 	return db.todo.findMany({
 		select: {
 			id: true,
@@ -10,7 +11,7 @@ export const getAllTodos = async () => {
 			creatorID: true
 		},
 		orderBy: {
-			createdAt: "desc"
+			[key]: value
 		}
 	})
 }

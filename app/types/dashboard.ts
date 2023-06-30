@@ -15,3 +15,7 @@ export interface ITextContentProps {
 export interface ICheckboxTodoProps {
 	completed: boolean
 }
+export interface ISortOptionsProps {
+	tKey: string
+	value: string
+}
