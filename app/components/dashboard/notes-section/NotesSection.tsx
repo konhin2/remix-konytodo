@@ -6,7 +6,6 @@ import WraperNote from "./note"
 
 const NotexSection: React.FC = () => {
 	const { todos } = useLoaderData<typeof loader>()
-	console.log(todos)
 	const todosSections = todos.map((todo) => {
 		return (
 			<WraperNote

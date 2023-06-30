@@ -22,8 +22,15 @@ export const links: LinksFunction = () => [
 	...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : [])
 ]
 
-export const loader: LoaderFunction = (args) => rootAuthLoader(args)
+export const loader: LoaderFunction = (args) => {
+	return rootAuthLoader(args, ({ request }) => {
+		const { userId } = request.auth
+		return { userId }
+	})
+}
+
 export const CatchBoundary = ClerkCatchBoundary()
+
 const App = () => {
 	return (
 		<html lang="en">

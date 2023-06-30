@@ -9,6 +9,7 @@ const NavLinkComp: React.FC<INavLinkProps> = ({ path, text, icon }) => {
 		<li>
 			<NavLink
 				to={path}
+				prefetch="intent"
 				className={({ isActive }) =>
 					twMerge(inactiveText, isActive && activeText)
 				}
