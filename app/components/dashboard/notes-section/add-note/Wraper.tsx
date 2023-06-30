@@ -1,17 +1,23 @@
 import { PlusIcon } from "@heroicons/react/20/solid"
 import { Form, useNavigation } from "@remix-run/react"
+import * as React from "react"
 import { useTranslation } from "react-i18next"
 import { Conditional } from "~/components/common"
 
 const Wraper: React.FC = () => {
 	const { t } = useTranslation()
 	const navigation = useNavigation()
+	const formRef = React.useRef<HTMLFormElement>(null)
+	React.useEffect(() => {
+		if (navigation.state === "idle") formRef.current?.reset()
+	}, [navigation.state])
 	return (
 		<li className="px-6 py-4">
 			<Form
 				method="post"
 				action="/dashboard/notes"
 				className="flex flex-row items-center"
+				ref={formRef}
 			>
 				<div className="w-full mr-4 isolate -space-y-px rounded-md shadow-sm">
 					<div className="relative rounded-md rounded-b-none px-3 pb-1.5 pt-2.5 ring-1 ring-inset ring-gray-300 focus-within:z-10 focus-within:ring-2 focus-within:ring-konytool">

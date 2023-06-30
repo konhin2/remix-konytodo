@@ -3,6 +3,12 @@ import { db } from "~/utils/db.server"
 
 export const getAllTodos = async () => {
 	return db.todo.findMany({
+		select: {
+			id: true,
+			content: true,
+			completed: true,
+			creatorID: true
+		},
 		orderBy: {
 			createdAt: "desc"
 		}

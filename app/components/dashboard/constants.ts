@@ -23,10 +23,10 @@ export const SidebarLink: INavLinkProps[] = [
 ]
 
 export const SortOptions: string[] = [
-	"SORTED_BY_NAME",
-	"SORTED_BY_DATE",
 	"SORTED_BY_ACTIVE",
-	"SORTED_BY_DONE"
+	"SORTED_BY_DONE",
+	"SORTED_BY_NEW_OLD",
+	"SORTED_BY_OLD_NEW"
 ]
 
 export const NoteIconsPath = {

@@ -5,7 +5,7 @@
     "NOTES_LINK": "Notes",
     "NOTES_TITLE": "To Do",
     "SORTED_BY_ACTIVE": "Active",
-    "SORTED_BY_DATE": "Date",
-    "SORTED_BY_NAME": "Name",
-    "SORTED_BY_DONE": "Done"
+    "SORTED_BY_DONE": "Done",
+    "SORTED_BY_NEW_OLD": "New - Old",
+    "SORTED_BY_OLD_NEW": "Old - New"
 }
