@@ -12,7 +12,6 @@ const NotexSection: React.FC = () => {
 				key={todo.id}
 				completed={todo.completed}
 				creatorID={todo.creatorID}
-				id={todo.id}
 				content={todo.content}
 			/>
 		)

@@ -9,9 +9,10 @@ import { todoSchema } from "~/utils/validations.server"
 export const meta: V2_MetaFunction = () => {
 	return [{ title: "Dashboard" }]
 }
-export const loader = async (_: DataFunctionArgs) => {
+export const loader = async (args: DataFunctionArgs) => {
+	const { userId } = await getAuth(args)
 	const todos = await getAllTodos()
-	return json({ todos })
+	return json({ todos, userId })
 }
 export const action = async (args: DataFunctionArgs) => {
 	const { userId } = await getAuth(args)

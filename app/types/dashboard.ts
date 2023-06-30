@@ -4,11 +4,9 @@ export interface INavLinkProps {
 	icon: string
 }
 export interface ITodoProps {
-	id: number
 	content: string
 	completed: boolean
-	creatorID?: string
-	createdAt?: string
+	creatorID: string
 }
 export interface ITextContentProps {
 	content: string

@@ -1,9 +1,13 @@
+import { useLoaderData } from "@remix-run/react"
+import { Conditional } from "~/components/common"
+import { loader } from "~/routes/dashboard+/notes/_dashboard-notes"
 import { ITodoProps } from "~/types/dashboard"
 import Checkbox from "./Checkbox"
 import Icons from "./Icons"
 import TextContent from "./TextContent"
 
-const Wraper: React.FC<ITodoProps> = ({ completed, content }) => {
+const Wraper: React.FC<ITodoProps> = ({ completed, content, creatorID }) => {
+	const { userId } = useLoaderData<typeof loader>()
 	return (
 		<li className="px-6 py-4">
 			<fieldset>
@@ -12,7 +16,9 @@ const Wraper: React.FC<ITodoProps> = ({ completed, content }) => {
 					<div className="relative flex items-center">
 						<Checkbox completed={completed} />
 						<TextContent completed={completed} content={content} />
-						<Icons />
+						<Conditional condition={creatorID === userId}>
+							<Icons />
+						</Conditional>
 					</div>
 				</div>
 			</fieldset>
