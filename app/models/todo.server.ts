@@ -19,3 +19,7 @@ export const getAllTodos = async (order: string) => {
 export const createTodo = async (data: CreateNoteProps) => {
 	return db.todo.create({ data })
 }
+
+export const deleteTodo = async (id: number) => {
+	return db.todo.delete({ where: { id } })
+}

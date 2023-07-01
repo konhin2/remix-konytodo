@@ -6,7 +6,12 @@ import Checkbox from "./Checkbox"
 import Icons from "./Icons"
 import TextContent from "./TextContent"
 
-const Wraper: React.FC<ITodoProps> = ({ completed, content, creatorID }) => {
+const Wraper: React.FC<ITodoProps> = ({
+	completed,
+	content,
+	creatorID,
+	id
+}) => {
 	const { userId } = useLoaderData<typeof loader>()
 	return (
 		<li className="px-6 py-4">
@@ -17,7 +22,7 @@ const Wraper: React.FC<ITodoProps> = ({ completed, content, creatorID }) => {
 						<Checkbox completed={completed} />
 						<TextContent completed={completed} content={content} />
 						<Conditional condition={creatorID === userId}>
-							<Icons />
+							<Icons id={id} />
 						</Conditional>
 					</div>
 				</div>

@@ -7,6 +7,7 @@ export interface ITodoProps {
 	content: string
 	completed: boolean
 	creatorID: string
+	id: number
 }
 export interface ITextContentProps {
 	content: string
@@ -18,4 +19,7 @@ export interface ICheckboxTodoProps {
 export interface ISortOptionsProps {
 	tKey: string
 	value: string
+}
+export interface INavIconProps {
+	id: number
 }

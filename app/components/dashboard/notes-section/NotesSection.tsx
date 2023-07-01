@@ -10,6 +10,7 @@ const NotexSection: React.FC = () => {
 		return (
 			<WraperNote
 				key={todo.id}
+				id={todo.id}
 				completed={todo.completed}
 				creatorID={todo.creatorID}
 				content={todo.content}

@@ -4,7 +4,7 @@ import { useNavigation } from "@remix-run/react"
 import { Conditional } from "~/components/common"
 import { NotesSection } from "~/components/dashboard"
 import { SortOptions } from "~/components/dashboard/constants"
-import { createTodo, getAllTodos } from "~/models/todo.server"
+import { createTodo, deleteTodo, getAllTodos } from "~/models/todo.server"
 import { todoSchema } from "~/utils/validations.server"
 
 export const meta: V2_MetaFunction = () => {
@@ -26,18 +26,26 @@ export const loader = async (args: DataFunctionArgs) => {
 	return json({ todos, userId })
 }
 export const action = async (args: DataFunctionArgs) => {
-	// Construct the todo payload
-	const { userId } = await getAuth(args)
-	const formData = await args.request.formData()
-	const content = formData.get("todo-content")
-	const todoPayload = todoSchema.parse({
-		content,
-		creatorID: userId
-	})
+	if (args.request.method === "POST") {
+		// Construct the todo payload
+		const { userId } = await getAuth(args)
+		const formData = await args.request.formData()
+		const content = formData.get("todo-content")
+		const todoPayload = todoSchema.parse({
+			content,
+			creatorID: userId
+		})
 
-	// Create the todo
-	await Promise.all([await createTodo(todoPayload)])
-	return json({ message: "Todo created" }, { status: 201 })
+		// Create the todo
+		await Promise.all([await createTodo(todoPayload)])
+		return json({ message: "Todo created" }, { status: 201 })
+	} else if (args.request.method === "DELETE") {
+		const { userId } = await getAuth(args)
+		const formData = await args.request.formData()
+		const todoId = Number(formData.get("todo-id"))
+		await Promise.all([await deleteTodo(todoId)])
+		return json({ message: "Todo deleted" }, { status: 201 })
+	}
 }
 const DashboardNotes = () => {
 	const navigation = useNavigation()

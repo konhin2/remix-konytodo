@@ -14,7 +14,7 @@ const Wraper: React.FC = () => {
 	return (
 		<li className="px-6 py-4">
 			<Form
-				method="post"
+				method="POST"
 				action="/dashboard/notes"
 				className="flex flex-row items-center"
 				ref={formRef}
