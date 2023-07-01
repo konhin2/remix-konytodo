@@ -1,0 +1,11 @@
+{
+    "DASHBOARD_LINK": "Panel",
+    "HOME_LINK": "Inicio",
+    "LOGIN_LINK": "Acceder",
+    "SIGNUP_LINK": "Registrarse",
+    "PROFILE_SET_TOGGLE": "Perfil",
+    "SIGNOUT_TOGGLE": "Cerrar sesión",
+    "NOT_FOUND": "Página no encontrada",
+    "NOT_FOUND_MESSAGE": "La página que buscas no existe.",
+    "NOT_FOUND_LINK": "Volver al inicio"
+}

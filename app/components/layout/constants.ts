@@ -3,3 +3,7 @@ export const SidebarLinkClass = {
 	inactive:
 		"inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-70"
 }
+export const LanguageOptions = [
+	{ value: "en", tKey: "LO_EN" },
+	{ value: "es", tKey: "LO_ES" }
+]

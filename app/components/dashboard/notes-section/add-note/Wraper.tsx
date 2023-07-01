@@ -18,7 +18,7 @@ const Wraper: React.FC = () => {
 		<li className="px-6 py-4">
 			<Conditional condition={todo !== null}>
 				<p className="mb-3 text-sm text-konytool-d" id="todo-content">
-					You are on edit mode!
+					{t("dashboard.EDIT_MODE")}
 				</p>
 				<Form
 					method="PUT"

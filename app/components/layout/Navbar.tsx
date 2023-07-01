@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next"
 import { twMerge } from "tailwind-merge"
 import Icon from "~/../public/favicon.ico"
 import AuthLink from "./AuthLink"
+import ChangeLanguage from "./ChangeLanguage"
 import { SidebarLinkClass } from "./constants"
 
 const Navbar: React.FC = () => {
@@ -58,6 +59,7 @@ const Navbar: React.FC = () => {
 						<SignedIn>
 							<UserButton afterSignOutUrl="/login" />
 						</SignedIn>
+						<ChangeLanguage />
 					</div>
 				</div>
 			</div>

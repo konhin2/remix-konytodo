@@ -1,7 +1,10 @@
 {
     "DROPDOWN_TITLE": "Sort By",
+    "EDIT_MODE": "You are on edit mode!",
     "HOME_LINK": "Home",
     "INPUT_NOTE": "Write your note...",
+    "LO_EN": "English 🇺🇸",
+    "LO_ES": "Spanish 🇲🇽",
     "NOTES_LINK": "Notes",
     "NOTES_TITLE": "To Do",
     "SORTED_BY_ACTIVE": "Active",
