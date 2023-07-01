@@ -6,7 +6,8 @@ import { ITodoProp } from "~/types/dashboard"
 const Checkbox: React.FC<ITodoProp> = ({ id }) => {
 	const { todos } = useLoaderData<typeof loader>()
 	const singleTodo = todos.find((todo) => todo.id === id)
-	const [status, setDtatys] = React.useState(singleTodo?.completed)
+	if (!singleTodo) return null
+	const [status, setDtatys] = React.useState(singleTodo.completed)
 	return (
 		<div className="h-6 items-center flex">
 			<input

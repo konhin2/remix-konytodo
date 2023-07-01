@@ -1,8 +1,12 @@
-import { Form } from "@remix-run/react"
+import { Form, useLoaderData } from "@remix-run/react"
+import { loader } from "~/routes/dashboard+/notes/_dashboard-notes"
 import { ITodoProp } from "~/types/dashboard"
 import { NoteIconsPath } from "../../constants"
 
 const Icons: React.FC<ITodoProp> = ({ id }) => {
+	const { todos } = useLoaderData<typeof loader>()
+	const singleTodo = todos.find((todo) => todo.id === id)
+	if (!singleTodo) return null
 	return (
 		<div className="flex flex-col">
 			<svg
@@ -26,6 +30,13 @@ const Icons: React.FC<ITodoProp> = ({ id }) => {
 					id="todo-id"
 					className="hidden"
 					value={id}
+				/>
+				<input
+					type="text"
+					name="todo-creator-id"
+					id="todo-creator-id"
+					className="hidden"
+					value={singleTodo.creatorID}
 				/>
 				<button type="submit">
 					<svg

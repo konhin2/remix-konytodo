@@ -43,6 +43,10 @@ export const action = async (args: DataFunctionArgs) => {
 		const { userId } = await getAuth(args)
 		const formData = await args.request.formData()
 		const todoId = Number(formData.get("todo-id"))
+		const todoCreatorID = formData.get("todo-creator-id")
+		if (todoCreatorID !== userId) {
+			return json({ message: "Unauthorized" }, { status: 401 })
+		}
 		await Promise.all([await deleteTodo(todoId)])
 		return json({ message: "Todo deleted" }, { status: 201 })
 	}
