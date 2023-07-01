@@ -53,6 +53,7 @@ const Icons: React.FC<ITodoProp> = ({ id }) => {
 					id="todo-id"
 					className="hidden"
 					value={id}
+					readOnly
 				/>
 				<input
 					type="text"
@@ -60,6 +61,7 @@ const Icons: React.FC<ITodoProp> = ({ id }) => {
 					id="todo-creator-id"
 					className="hidden"
 					value={singleTodo.creatorID}
+					readOnly
 				/>
 				<button type="submit">
 					<svg

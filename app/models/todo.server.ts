@@ -37,6 +37,13 @@ export const updateTodo = async (id: Todo["id"], content: Todo["content"]) => {
 	return db.todo.update({ where: { id }, data: { content } })
 }
 
+export const updateTodoStatus = async (
+	id: Todo["id"],
+	completed: Todo["completed"]
+) => {
+	return db.todo.update({ where: { id }, data: { completed } })
+}
+
 export const deleteTodo = async (id: Todo["id"]) => {
 	return db.todo.delete({ where: { id } })
 }

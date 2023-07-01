@@ -14,7 +14,8 @@ import {
 	deleteTodo,
 	getAllTodos,
 	getTodoById,
-	updateTodo
+	updateTodo,
+	updateTodoStatus
 } from "~/models/todo.server"
 import { todoSchema } from "~/utils/validations.server"
 
@@ -28,6 +29,8 @@ export const loader = async (args: DataFunctionArgs) => {
 	const order = url.searchParams.get("order") || DEFAULT_SORT
 
 	const edit = url.searchParams.get("edit")
+	const editCheckbox = url.searchParams.get("edit-checkbox")
+	console.log(editCheckbox)
 	// Get the user id from clerk
 	const { userId } = await getAuth(args)
 
@@ -36,6 +39,14 @@ export const loader = async (args: DataFunctionArgs) => {
 		const todo = await getTodoById(Number(edit))
 		const todos = await getAllTodos(order)
 		return json({ todos, userId, todo })
+	}
+	if (editCheckbox) {
+		const todoId = Number(editCheckbox.split("-")[0])
+		const status = editCheckbox.split("-")[1] === "true"
+		const redirectUrl = editCheckbox.split("-")[2]
+		await updateTodoStatus(todoId, status)
+		const todos = await getAllTodos(order)
+		return json({ todos, userId, todo: null }), redirect(redirectUrl)
 	}
 	// Get all the todos from Prisma
 	const todos = await getAllTodos(order)
