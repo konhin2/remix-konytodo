@@ -1,10 +1,21 @@
 import { getAuth } from "@clerk/remix/ssr.server"
-import { V2_MetaFunction, json, type DataFunctionArgs } from "@remix-run/node"
+import {
+	V2_MetaFunction,
+	json,
+	redirect,
+	type DataFunctionArgs
+} from "@remix-run/node"
 import { useNavigation } from "@remix-run/react"
 import { Conditional } from "~/components/common"
 import { NotesSection } from "~/components/dashboard"
 import { SortOptions } from "~/components/dashboard/constants"
-import { createTodo, deleteTodo, getAllTodos } from "~/models/todo.server"
+import {
+	createTodo,
+	deleteTodo,
+	getAllTodos,
+	getTodoById,
+	updateTodo
+} from "~/models/todo.server"
 import { todoSchema } from "~/utils/validations.server"
 
 export const meta: V2_MetaFunction = () => {
@@ -16,32 +27,43 @@ export const loader = async (args: DataFunctionArgs) => {
 	const url = new URL(args.request.url)
 	const order = url.searchParams.get("order") || DEFAULT_SORT
 
+	const edit = url.searchParams.get("edit")
 	// Get the user id from clerk
 	const { userId } = await getAuth(args)
 
+	// If the user is editing a todo, return the todo and the user id
+	if (edit) {
+		const todo = await getTodoById(Number(edit))
+		const todos = await getAllTodos(order)
+		return json({ todos, userId, todo })
+	}
 	// Get all the todos from Prisma
 	const todos = await getAllTodos(order)
-
 	// Return the todos and the user id
-	return json({ todos, userId })
+	return json({ todos, userId, todo: null })
 }
 export const action = async (args: DataFunctionArgs) => {
+	const { userId } = await getAuth(args)
+	const formData = await args.request.formData()
 	if (args.request.method === "POST") {
 		// Construct the todo payload
-		const { userId } = await getAuth(args)
-		const formData = await args.request.formData()
+
 		const content = formData.get("todo-content")
 		const todoPayload = todoSchema.parse({
 			content,
 			creatorID: userId
 		})
-
 		// Create the todo
 		await Promise.all([await createTodo(todoPayload)])
 		return json({ message: "Todo created" }, { status: 201 })
+	} else if (args.request.method === "PUT") {
+		const url = new URL(args.request.url)
+		const edit = url.searchParams.get("edit")
+		const content = formData.get("todo-content") as string
+
+		await Promise.all([await updateTodo(Number(edit), content)])
+		return redirect("/dashboard/notes")
 	} else if (args.request.method === "DELETE") {
-		const { userId } = await getAuth(args)
-		const formData = await args.request.formData()
 		const todoId = Number(formData.get("todo-id"))
 		const todoCreatorID = formData.get("todo-creator-id")
 		if (todoCreatorID !== userId) {

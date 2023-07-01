@@ -1,28 +1,51 @@
-import { Form, useLoaderData } from "@remix-run/react"
+import { Form, Link, useLoaderData } from "@remix-run/react"
+import { Conditional } from "~/components/common"
 import { loader } from "~/routes/dashboard+/notes/_dashboard-notes"
 import { ITodoProp } from "~/types/dashboard"
 import { NoteIconsPath } from "../../constants"
 
 const Icons: React.FC<ITodoProp> = ({ id }) => {
-	const { todos } = useLoaderData<typeof loader>()
+	const { todos, todo } = useLoaderData<typeof loader>()
 	const singleTodo = todos.find((todo) => todo.id === id)
 	if (!singleTodo) return null
 	return (
 		<div className="flex flex-col">
-			<svg
-				fill="none"
-				viewBox="0 0 24 24"
-				strokeWidth="1.5"
-				stroke="currentColor"
-				aria-hidden="true"
-				className="p-1 h-6 w-6 text-gray-400  hover:text-konytool hover:bg-gray-100 group flex rounded-md my-2 text-sm leading-6 font-semibold"
-			>
-				<path
-					strokeLinecap="round"
-					strokeLinejoin="round"
-					d={NoteIconsPath.editPath}
-				/>
-			</svg>
+			<Conditional condition={todo !== null}>
+				<Link to={`.`}>
+					<svg
+						fill="none"
+						viewBox="0 0 24 24"
+						strokeWidth="1.5"
+						stroke="currentColor"
+						aria-hidden="true"
+						className="p-1 h-6 w-6 text-white bg-konytool-m group flex rounded-md my-2 text-sm leading-6 font-semibold"
+					>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							d={NoteIconsPath.editPath}
+						/>
+					</svg>
+				</Link>
+			</Conditional>
+			<Conditional condition={todo === null}>
+				<Link to={`?edit=${id}`}>
+					<svg
+						fill="none"
+						viewBox="0 0 24 24"
+						strokeWidth="1.5"
+						stroke="currentColor"
+						aria-hidden="true"
+						className="p-1 h-6 w-6 text-gray-400  hover:text-konytool hover:bg-gray-100 group flex rounded-md my-2 text-sm leading-6 font-semibold"
+					>
+						<path
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							d={NoteIconsPath.editPath}
+						/>
+					</svg>
+				</Link>
+			</Conditional>
 			<Form method="DELETE" action="/dashboard/notes">
 				<input
 					type="number"
