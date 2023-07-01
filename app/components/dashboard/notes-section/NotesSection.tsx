@@ -7,15 +7,7 @@ import WraperNote from "./note"
 const NotexSection: React.FC = () => {
 	const { todos } = useLoaderData<typeof loader>()
 	const todosSections = todos.map((todo) => {
-		return (
-			<WraperNote
-				key={todo.id}
-				id={todo.id}
-				completed={todo.completed}
-				creatorID={todo.creatorID}
-				content={todo.content}
-			/>
-		)
+		return <WraperNote key={todo.id} id={todo.id} />
 	})
 	return (
 		<main className="w-full px-6 md:px-20 lg:px-44 xl:px-72 py-10 flex flex-col justify-content">

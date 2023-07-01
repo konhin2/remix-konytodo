@@ -1,8 +1,8 @@
 import { Form } from "@remix-run/react"
-import { INavIconProps } from "~/types/dashboard"
+import { ITodoProp } from "~/types/dashboard"
 import { NoteIconsPath } from "../../constants"
 
-const Icons: React.FC<INavIconProps> = ({ id }) => {
+const Icons: React.FC<ITodoProp> = ({ id }) => {
 	return (
 		<div className="flex flex-col">
 			<svg
